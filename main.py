@@ -15,7 +15,11 @@ def papaphrase(text: str) -> str:
     }
 
     response = requests.post(url, json=payload, headers=headers)
-    return response.json()['rewrite']
+    try:
+        ret = response.json()['rewrite']
+    except:
+        ret = text
+    return ret
     
 
 def get_word_file() -> str:
@@ -41,9 +45,8 @@ def main():
     # paraphrase the file
     for p in doc.paragraphs:
         paraphrased = papaphrase(p.text)
-        paraphrased_text = paraphrased.text
 
-        new_p = new_doc.add_paragraph(paraphrased_text)
+        new_p = new_doc.add_paragraph(paraphrased)
         new_p.style = p.style
 
     new_doc.save(new_path)
