@@ -18,7 +18,7 @@ def papaphrase(text: str) -> str:
     return response.json()['rewrite']
     
 
-def get_word_file(self) -> str:
+def get_word_file() -> str:
     while True:
         file_path = input('Enter the file path: ')
         if os.path.exists(file_path):
